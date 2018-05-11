@@ -1,0 +1,158 @@
+<!doctype html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width = device-width, initial-scale = 1">
+    <title>Admin Cinema</title>
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/admin_cinema.css">
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap-select.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Cormorant' rel='stylesheet' type='text/css'>
+    <script src="/bootstrap/js/jquery-3.1.1.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/bootstrap/js/bootstrap-select.min.js"></script>
+</head>
+
+
+<body>
+
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapsed-menu" aria-expanded="false">
+                    <span class="sr-only"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="collapsed-menu">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="http://localhost:8080/speciality">Subjects by Speciality</a></li>
+                    <li ><a href="http://localhost:8080/test">Groups by Test</a></li>
+                    <li><a href="http://localhost:8080/contractKind">Groups by Contract</a></li>
+                    <li><a href="http://localhost:8080/subject">Students by Subject</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <p class="navbar-text"> Имя пользователя <a href="#"  class="navbar-link"> [Выход]</a></p>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div class="container">
+    <div class="jumbotron">
+        <h2>Table of subjects by speciality</h2>
+        <hr />
+
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-default panel-table">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col col-xs-12">
+                                <p>Table of subjects by speciality</p>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="tab-content col-lg-6">
+                                <div id="addCinema" class=" collapse">
+                                    <div class ="menu">
+                                        <input type="text" class="form-control data-input" placeholder="Название кинотеатра" maxlength="50">
+                                        <input type="text" class="form-control data-input" placeholder="Город" maxlength="30">
+                                        <input type="text" class="form-control data-input" placeholder="Адрес" maxlength="50">
+                                        <input type="text" class="form-control data-input" placeholder="Телефон" maxlength="20">
+                                        <input type="text" class="form-control data-input" placeholder="Сайт"maxlength="50">
+
+
+                                        Логотип:<input type="file" accept=".jpeg,.gif,.jpg" class="data-input" />
+
+
+
+                                        <button class="btn btn-success data-input" type="button">Сохранить</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-list" id="cinemaTable">
+                                <thead>
+                                <tr>
+                                    <th>Speciality</th>
+                                    <th>Group code</th>
+                                    <th>Teach plan ID</th>
+                                    <th>Semester end date</th>
+                                    <th>Test kind</th>
+                                    <th>Subject</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <th:block th:each="specialityItem : ${specialityList}">
+                                    <tr>
+                                        <th th:rowspan="${specialityItem.getGroupOfStudents().size()+1}"> <h5 th:text="${specialityItem.getName()}">...</h5></th>
+
+                                    </tr>
+
+                                <th:block th:each="group : ${specialityItem.getGroupOfStudents()}">
+                                    <tr>
+                                        <td th:text="${group.getGroupCode()}">...</td>
+                                        <td>
+                                            <table class="table" >
+                                                <th:block th:each="plan : ${group.getTeachPlans()}">
+                                                    <tr>
+                                                        <td th:text="${plan.getId()}">...</td>
+                                                    </tr>
+                                                </th:block>
+                                            </table>
+                                        </td>
+                                        <td>
+                                            <table class="table" >
+                                                <th:block th:each="plan : ${group.getTeachPlans()}">
+                                                    <tr>
+                                                        <td th:text="${plan.getSemestr().getSessionEndDate()}">...</td>
+                                                    </tr>
+                                                </th:block>
+                                            </table>
+                                        </td>
+                                        <td>
+                                        <table class="table" >
+                                            <th:block th:each="plan : ${group.getTeachPlans()}">
+                                                <tr>
+                                                    <td th:text="${plan.getTestKind().name}">...</td>
+                                                </tr>
+                                            </th:block>
+                                        </table>
+                                        </td>
+                                        <td>
+                                            <table class="table table-list" >
+                                                <th:block th:each="plan : ${group.getTeachPlans()}">
+                                                    <tr>
+                                                        <td th:text="${plan.getSubject().getName()}">...</td>
+                                                    </tr>
+                                                </th:block>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </th:block>
+                                </th:block>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

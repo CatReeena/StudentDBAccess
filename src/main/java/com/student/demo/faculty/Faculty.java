@@ -28,4 +28,27 @@ public class Faculty {
         cafedra.setFaculty(null);
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<Cafedra> getCafedras() {
+        return cafedras;
+    }
+
+    public void setCafedras(Set<Cafedra> cafedras) {
+        this.cafedras = cafedras;
+    }
 }

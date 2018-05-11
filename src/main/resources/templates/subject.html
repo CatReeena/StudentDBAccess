@@ -1,0 +1,120 @@
+<!doctype html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width = device-width, initial-scale = 1">
+    <title>Students by Subject</title>
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/admin_cinema.css">
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap-select.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Cormorant' rel='stylesheet' type='text/css'>
+    <script src="/bootstrap/js/jquery-3.1.1.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/bootstrap/js/bootstrap-select.min.js"></script>
+</head>
+
+
+<body>
+
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapsed-menu" aria-expanded="false">
+                    <span class="sr-only"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="collapsed-menu">
+                <ul class="nav navbar-nav">
+                    <li ><a href="http://localhost:8080/speciality">Subjects by Speciality</a></li>
+                    <li ><a href="http://localhost:8080/test">Groups by Test</a></li>
+                    <li><a href="http://localhost:8080/contractKind">Groups by Contract</a></li>
+                    <li  class="active"><a href="http://localhost:8080/subject">Students by Subject</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div class="container">
+    <div class="jumbotron">
+        <h2>Table of students by Subject</h2>
+        <hr />
+
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-default panel-table">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col col-xs-12">
+                                <p> Table of students by Subject</p>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-list" id="cinemaTable">
+                                <thead>
+                                <tr>
+                                    <th>Subject</th>
+                                    <th>Semester end date</th>
+                                    <th>Group code</th>
+                                    <th>Student name</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <th:block th:each="subject : ${subjectList}">
+                                    <tr>
+                                        <td th:text="${subject.getName()}">...</td>
+                                        <td>
+                                            <table class="table table-list" >
+                                                <th:block th:each="plan : ${subject.getTeachPlans()}">
+                                                    <tr>
+                                                        <td th:text="${plan.getSemestr().getTeachEndDate()}">...</td>
+                                                    </tr>
+                                                </th:block>
+                                            </table>
+                                        </td>
+                                        <td>
+                                            <table class="table table-list" >
+                                                <th:block th:each="plan : ${subject.getTeachPlans()}">
+                                                    <tr>
+                                                        <td th:text="${plan.getGroupOfStudents().getGroupCode()}">...</td>
+                                                    </tr>
+                                                </th:block>
+                                            </table>
+                                        </td>
+                                        <td>
+                                            <table class="table table-list" >
+                                                <th:block th:each="plan : ${subject.getTeachPlans()}">
+                                                    <th:block th:each="student : ${plan.getGroupOfStudents().getStudents()}">
+                                                    <tr>
+                                                        <td th:text="${student.getPerson().getName()} + ' ' +  ${student.getPerson().getSurname()}">...</td>
+                                                    </tr>
+                                                    </th:block>
+                                                </th:block>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </th:block>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

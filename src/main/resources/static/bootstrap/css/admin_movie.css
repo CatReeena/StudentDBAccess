@@ -1,0 +1,47 @@
+.filmInfo {
+  font-size: 10pt; 
+  margin-bottom: 2pt; 
+}
+
+
+.infoHeader {
+  font-size: 10pt;
+  margin-bottom: 0pt;
+}
+
+
+.menu {
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-radius: 5px 5px 5px 5px;
+    padding: 10px;
+    margin-bottom: 15pt;
+   
+}
+
+.whiteBG {
+ background-color: white;
+}
+
+.list-font {
+	 font-size: 12pt;
+}
+
+.data-input { 
+  margin-bottom: 10px;
+}
+
+
+.itemsContainer:hover .play{display:block}
+.play {
+  position : absolute;
+    display:none;
+    top:20%; 
+    width:60px;
+    margin:0 auto; left:0px;
+    right:0px;
+    z-index:100;
+     
+} 

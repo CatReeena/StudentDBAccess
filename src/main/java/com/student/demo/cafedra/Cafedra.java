@@ -33,4 +33,40 @@ public class Cafedra {
     public void setFaculty(Faculty faculty) {
         this.faculty = faculty;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Set<Speciality> getSpecialities() {
+        return specialities;
+    }
+
+    public void setSpecialities(Set<Speciality> specialities) {
+        this.specialities = specialities;
+    }
+
+    public Faculty getFaculty() {
+        return faculty;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getShifr() {
+        return shifr;
+    }
+
+    public void setShifr(String shifr) {
+        this.shifr = shifr;
+    }
 }

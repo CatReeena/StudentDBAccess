@@ -123,4 +123,11 @@ public class Person {
         plan.setPerson(null);
     }
 
+    public Set<TeachPlan> getPlans() {
+        return plans;
+    }
+
+    public void setPlans(Set<TeachPlan> plans) {
+        this.plans = plans;
+    }
 }
